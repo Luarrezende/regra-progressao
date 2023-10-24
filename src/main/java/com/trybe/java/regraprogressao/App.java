@@ -30,14 +30,29 @@ public class App {
       pesos.add(peso);
       System.out.println("Digite a nota obtida para " + atividades.get(i - 1) + ": ");
       int nota = scan.nextInt();
-      notas.add(nota);
+      notas.add(nota * peso);
       scan.nextLine();
     }
 
     int result = pesos.stream().reduce(0, Integer::sum);
+    double resultAluno = notas.stream()
+                          .mapToDouble(nota -> nota)
+                          .sum() / result;
 
     if (result != 100) {
       System.out.println("A soma dos pesos é diferente de 100!");
+    }
+
+    if (resultAluno >= 85) {
+      System.out.println(
+          "Parabéns! Você alcançou "
+            + resultAluno
+              + "%! E temos o prazer de informar que você obteve aprovação!");
+    } else {
+      System.out.println(
+          "Lamentamos informar que, com base na sua pontuação alcançada neste período, "
+            + resultAluno
+              + "%, você não atingiu a pontuação mínima necessária para sua aprovação.");
     }
     
     scan.close();
