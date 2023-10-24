@@ -33,6 +33,12 @@ public class App {
       notas.add(nota);
       scan.nextLine();
     }
+
+    int result = pesos.stream().reduce(0, Integer::sum);
+
+    if (result != 100) {
+      System.out.println("A soma dos pesos é diferente de 100!");
+    }
     
     scan.close();
   }
